@@ -60,12 +60,14 @@ def train_model(train_file='sentiment_set.pickle', job_dir='./tmp/example-5', **
     model.compile(loss='categorical_crossentropy',
                   optimizer=RMSprop(),
                   metrics=['accuracy'])
-
+    tbCallBack = keras.callbacks.TensorBoard(log_dir=logs_path, histogram_freq=1,  
+          write_graph=True, write_images=True,write_grads=True)
     history = model.fit(x_train, y_train,
                         batch_size=batch_size,
                         epochs=epochs,
                         verbose=1,
-                        validation_data=(x_test, y_test)
+                        validation_data=(x_test, y_test),
+                        callbacks=[tbCallBack]
                         )
     score = model.evaluate(x_test, y_test, verbose=0)
     print('Test loss:', score[0])

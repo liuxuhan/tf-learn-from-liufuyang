@@ -1,7 +1,7 @@
-export BUCKET_NAME=tf-learn-simple-sentiment
-export JOB_NAME="example_5_train_$(date +%Y%m%d_%H%M%S)"
+export BUCKET_NAME=my-cnn-project
+export JOB_NAME=example_5_train_keras_w_grad
 export JOB_DIR=gs://$BUCKET_NAME/$JOB_NAME
-export REGION=europe-west1
+export REGION=asia-east1
 
 gcloud ml-engine jobs submit training $JOB_NAME \
   --job-dir gs://$BUCKET_NAME/$JOB_NAME \
@@ -11,4 +11,4 @@ gcloud ml-engine jobs submit training $JOB_NAME \
   --region $REGION \
   --config=trainer/cloudml-gpu.yaml \
   -- \
-  --train-file gs://tf-learn-simple-sentiment/sentiment_set.pickle
+  --train-file gs://my-cnn-project/example5/sentiment_set.pickle
